@@ -11,15 +11,17 @@ public class Inventory {
     private String price;
     private String quantity;
     private String image;
+    private String phoneNumber;
 
     public Inventory() {
     }
 
-    public Inventory(String productName, String price, String quantity, String image) {
+    public Inventory(String productName, String price, String quantity, String image, String phoneNumber) {
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
         this.image = image;
+        this.phoneNumber = phoneNumber;
     }
 
     public long getId() {
@@ -61,4 +63,13 @@ public class Inventory {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 }

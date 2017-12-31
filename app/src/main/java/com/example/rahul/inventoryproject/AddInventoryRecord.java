@@ -5,8 +5,8 @@ package com.example.rahul.inventoryproject;
  */
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +19,7 @@ public class AddInventoryRecord extends AppCompatActivity {
     private EditText mPriceEditText;
     private EditText mQuantityEditText;
     private EditText mImageEditText;
+    private EditText mPhoneEditText;
     private Button mAddBtn;
 
     private DBHelper dbHelper;
@@ -33,6 +34,7 @@ public class AddInventoryRecord extends AppCompatActivity {
         mPriceEditText = (EditText)findViewById(R.id.addProductPrice);
         mQuantityEditText = (EditText)findViewById(R.id.addProductQuantity);
         mImageEditText = (EditText)findViewById(R.id.userProfileImageLink);
+        mPhoneEditText = (EditText) findViewById(R.id.addPhone);
         mAddBtn = (Button)findViewById(R.id.addNewUserButton);
 
         //listen to add button click
@@ -51,6 +53,7 @@ public class AddInventoryRecord extends AppCompatActivity {
         String price = mPriceEditText.getText().toString().trim();
         String quantity = mQuantityEditText.getText().toString().trim();
         String image = mImageEditText.getText().toString().trim();
+        String phone = mPhoneEditText.getText().toString().trim();
         dbHelper = new DBHelper(this);
 
         if(name.isEmpty()){
@@ -72,9 +75,13 @@ public class AddInventoryRecord extends AppCompatActivity {
             //error name is empty
             Toast.makeText(this, "You must enter an image link", Toast.LENGTH_SHORT).show();
         }
+        if (phone.isEmpty()) {
+            //error name is empty
+            Toast.makeText(this, "You must enter an phone", Toast.LENGTH_SHORT).show();
+        }
 
         //create new person
-        Inventory inventory= new Inventory(name, price, quantity, image);
+        Inventory inventory = new Inventory(name, price, quantity, image, phone);
         dbHelper.addNewInventory(inventory);
 
         //finally redirect back home

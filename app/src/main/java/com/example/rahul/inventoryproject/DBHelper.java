@@ -16,16 +16,16 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = DBHelper.class.getSimpleName();
-   public static final String DATABASE_NAME = "inventory.db";
-    private static final int DATABASE_VERSION = 1;
-
+    public static final String DATABASE_NAME = "inventory.db";
     public static final String TABLE_NAME = "Inventory";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_INVENTORY_NAME = "name";
     public static final String COLUMN_INVENTORY_PRICE = "price";
     public static final String COLUMN_INVENTORY_QUANTITY = "quantity";
     public static final String COLUMN_INVENTORY_IMAGE = "image";
+    public static final String COLUMN_INVENTORY_PHONE = "phoneInfo";
+    private static final String TAG = DBHelper.class.getSimpleName();
+    private static final int DATABASE_VERSION = 2;
 
 
     public DBHelper(Context context) {
@@ -39,8 +39,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 COLUMN_INVENTORY_NAME + " TEXT NOT NULL, "+
                 COLUMN_INVENTORY_PRICE +" INTEGER NOT NULL, "+
                 COLUMN_INVENTORY_QUANTITY+" INTEGER NOT NULL, "+
-                COLUMN_INVENTORY_IMAGE + " BLOB NOT NULL);"
-                );
+                COLUMN_INVENTORY_IMAGE + " BLOB NOT NULL, " + COLUMN_INVENTORY_PHONE + " INTEGER NOT NULL);"
+        );
 
     }
 
@@ -60,10 +60,11 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_INVENTORY_PRICE,inventory.getPrice());
         values.put(COLUMN_INVENTORY_QUANTITY,inventory.getQuantity());
         values.put(COLUMN_INVENTORY_IMAGE,inventory.getImage());
+        values.put(COLUMN_INVENTORY_PHONE, inventory.getPhoneNumber());
 
         db.insert(TABLE_NAME,null,values);
         db.close();
-        Log.i(TAG,"name:"+COLUMN_INVENTORY_IMAGE+",price:"+COLUMN_INVENTORY_PRICE+",quantity: "+COLUMN_INVENTORY_QUANTITY+",image: "+COLUMN_INVENTORY_IMAGE);
+        Log.i(TAG, "name:" + COLUMN_INVENTORY_IMAGE + ",price:" + COLUMN_INVENTORY_PRICE + ",quantity: " + COLUMN_INVENTORY_QUANTITY + ",image: " + COLUMN_INVENTORY_IMAGE + ",phoneNumber:" + COLUMN_INVENTORY_PHONE);
 
     }
 
@@ -95,6 +96,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 inventory.setPrice(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_PRICE)));
                 inventory.setQuantity(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_QUANTITY)));
                 inventory.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_IMAGE)));
+                // inventory.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_PHONE)));
                 inventoryArrayList.add(inventory);
             }while (cursor.moveToNext());
         }
@@ -115,6 +117,7 @@ public class DBHelper extends SQLiteOpenHelper {
             receivedInventory.setPrice(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_PRICE)));
             receivedInventory.setQuantity(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_QUANTITY)));
             receivedInventory.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_IMAGE)));
+            receivedInventory.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_PHONE)));
         }
 
 
@@ -128,17 +131,21 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.execSQL("DELETE FROM "+TABLE_NAME+" WHERE _id= "+id+"'");
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE _id='" + id + "'");
         Toast.makeText(context, "Deleted Successfully.", Toast.LENGTH_SHORT).show();
 
     }
 
 
-    public void updateRecord(long id, Context context, Inventory updaterecord){
+    public void updateRecord(long id, Context context, Inventory updateRecord) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE "+ TABLE_NAME+" SET name ='"+ updaterecord.getProductName() +", price = "+
-                updaterecord.getPrice()+ " , quantity = "+updaterecord.getQuantity()+", image = "+updaterecord.getImage() +" WHERE _id= "+id+" ");
+        db.execSQL("UPDATE " + TABLE_NAME + " SET name ='" + updateRecord.getProductName() +
+                "', price ='" + updateRecord.getPrice() +
+                "', quantity ='" + updateRecord.getQuantity() +
+                "', image ='" + updateRecord.getImage() +
+                "', phoneInfo ='" + updateRecord.getPhoneNumber() +
+                "'  WHERE _id='" + id + "'");
 
             Toast.makeText(context,"Updated successfully.", Toast.LENGTH_SHORT).show();
     }

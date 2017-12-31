@@ -5,6 +5,7 @@ package com.example.rahul.inventoryproject;
  */
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,7 +20,9 @@ public class UpdateInventory extends AppCompatActivity {
     private EditText mPriceEditText;
     private EditText mQuantityEditText;
     private EditText mImageEditText;
+    private EditText mPhoneEditText;
     private Button mUpdateBtn;
+    private Button mOrderSupplies;
 
     private DBHelper dbHelper;
     private long receivedInventoryId;
@@ -34,7 +37,9 @@ public class UpdateInventory extends AppCompatActivity {
         mPriceEditText = (EditText)findViewById(R.id.dpriceUpdate);
         mQuantityEditText = (EditText)findViewById(R.id.dquantityUpdate);
         mImageEditText = (EditText)findViewById(R.id.duserProfileImageLinkUpdate);
+        mPhoneEditText = (EditText) findViewById(R.id.dUpdatePhoneNumber);
         mUpdateBtn = (Button)findViewById(R.id.dupdateInventoryButton);
+        mOrderSupplies = (Button) findViewById(R.id.dOrderSupplies);
 
         dbHelper = new DBHelper(this);
 
@@ -52,6 +57,7 @@ public class UpdateInventory extends AppCompatActivity {
         mPriceEditText.setText(queriedInventory.getPrice());
         mQuantityEditText.setText(queriedInventory.getQuantity());
         mImageEditText.setText(queriedInventory.getImage());
+        mPhoneEditText.setText(queriedInventory.getPhoneNumber());
 
 
 
@@ -64,13 +70,28 @@ public class UpdateInventory extends AppCompatActivity {
             }
         });
 
+
+        //trying to retrieve the phone number on the dialer app from sqlite
+        mOrderSupplies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //call the save person method
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+                dialIntent.setData(Uri.parse("tel:"));
+                startActivity(dialIntent);
+            }
+        });
+
     }
+
+
 
     private void updateInventory(){
         String name = mNameEditText.getText().toString().trim();
         String price = mPriceEditText.getText().toString().trim();
         String quantity =  mQuantityEditText.getText().toString().trim();
         String image = mQuantityEditText.getText().toString().trim();
+        String phone = mPhoneEditText.getText().toString().trim();
 
 
         if(name.isEmpty()){
@@ -92,9 +113,13 @@ public class UpdateInventory extends AppCompatActivity {
             //error name is empty
             Toast.makeText(this, "You must enter an image link", Toast.LENGTH_SHORT).show();
         }
+        if (phone.isEmpty()) {
+            //error name is empty
+            Toast.makeText(this, "You must enter an phone Number", Toast.LENGTH_SHORT).show();
+        }
 
         //create updated person
-        Inventory updatedInventory = new Inventory(name,price,quantity,image);
+        Inventory updatedInventory = new Inventory(name, price, quantity, image, phone);
 
         //call dbhelper update
         dbHelper.updateRecord(receivedInventoryId, this, updatedInventory);

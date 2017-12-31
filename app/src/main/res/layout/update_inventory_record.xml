@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -19,37 +17,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Name" />
+        android:hint="Name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/dpriceUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
-        android:hint="price" />
+        android:hint="price"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/dquantityUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="quantity" />
+        android:hint="quantity"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/duserProfileImageLinkUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textUri"
-        android:hint="Image profile url" />
+        android:hint="Image profile url"
+        android:inputType="textUri" />
+
+    <EditText
+        android:id="@+id/dUpdatePhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Supplier Phone Number"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/dupdateInventoryButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update inventory"/>
+        android:text="Update inventory" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:text="Not Enough Supplies Call Suppiler"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/dOrderSupplies"
+        android:layout_width="157dp"
+        android:layout_height="wrap_content"
+        android:text="Order Supplies" />
 
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.example.rahul.inventoryproject;
 
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 
@@ -23,31 +23,11 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     private RecyclerView mRecyclerV;
 
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView productNameTxtV;
-        public TextView productPriceTxtV;
-        public TextView productQuantityTxtV;
-        public ImageView productImageImgV;
-
-
-        public View layout;
-
-        public ViewHolder(View v) {
-            super(v);
-            layout = v;
-            productNameTxtV =  v.findViewById(R.id.ProductName);
-            productPriceTxtV =  v.findViewById(R.id.ProductPrice);
-            productQuantityTxtV =  v.findViewById(R.id.ProductQuantity);
-            productImageImgV =  v.findViewById(R.id.Productimage);
-
-
-
-
-        }
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public InventoryAdapter(ArrayList<Inventory> myDataset, Context context, RecyclerView recyclerView) {
+        mInventoryList = myDataset;
+        mContext = context;
+        mRecyclerV = recyclerView;
     }
 
     public void add(int position, Inventory inventory) {
@@ -60,23 +40,12 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         notifyItemRemoved(position);
     }
 
-
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public InventoryAdapter(ArrayList<Inventory> myDataset, Context context, RecyclerView recyclerView) {
-        mInventoryList = myDataset;
-        mContext = context;
-        mRecyclerV = recyclerView;
-    }
-
     // Create new views (invoked by the layout manager)
     @Override
     public InventoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        LayoutInflater inflater = LayoutInflater.from(
-                parent.getContext());
-        View v =
-                inflater.inflate(R.layout.display_screen, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View v = inflater.inflate(R.layout.display_screen, parent, false);
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -142,12 +111,31 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         mContext.startActivity(goToUpdate);
     }
 
-
-
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return mInventoryList.size();
+    }
+
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView productNameTxtV;
+        public TextView productPriceTxtV;
+        public TextView productQuantityTxtV;
+        public ImageView productImageImgV;
+        public View layout;
+
+        public ViewHolder(View v) {
+            super(v);
+            layout = v;
+            productNameTxtV = v.findViewById(R.id.ProductName);
+            productPriceTxtV = v.findViewById(R.id.ProductPrice);
+            productQuantityTxtV = v.findViewById(R.id.ProductQuantity);
+            productImageImgV = v.findViewById(R.id.Productimage);
+        }
     }
 
 
