@@ -27,6 +27,7 @@ public class UpdateInventory extends AppCompatActivity {
     private DBHelper dbHelper;
     private long receivedInventoryId;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class UpdateInventory extends AppCompatActivity {
         }
 
         /***populate user data before update***/
-        Inventory queriedInventory = dbHelper.getInventory(receivedInventoryId);
+        final Inventory queriedInventory = dbHelper.getInventory(receivedInventoryId);
         //set field to this user data
         mNameEditText.setText(queriedInventory.getProductName());
         mPriceEditText.setText(queriedInventory.getPrice());
@@ -76,12 +77,18 @@ public class UpdateInventory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //call the save person method
-                Intent dialIntent = new Intent(Intent.ACTION_DIAL);
-                dialIntent.setData(Uri.parse("tel:"));
-                startActivity(dialIntent);
+                dialPhoneNumber(queriedInventory.getPhoneNumber());
             }
         });
 
+    }
+
+    public void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
 
