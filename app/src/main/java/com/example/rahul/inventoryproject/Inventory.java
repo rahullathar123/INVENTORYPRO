@@ -12,6 +12,17 @@ public class Inventory {
     private String quantity;
     private String image;
     private String phoneNumber;
+    private String soldItems;
+
+    public Inventory(long id, String productName, String price, String quantity, String image, String phoneNumber, String soldItems) {
+        this.id = id;
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
+        this.image = image;
+        this.phoneNumber = phoneNumber;
+        this.soldItems = soldItems;
+    }
 
     public Inventory() {
     }
@@ -22,6 +33,14 @@ public class Inventory {
         this.quantity = quantity;
         this.image = image;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getSoldItems() {
+        return soldItems;
+    }
+
+    public void setSoldItems(String soldItems) {
+        this.soldItems = soldItems;
     }
 
     public long getId() {

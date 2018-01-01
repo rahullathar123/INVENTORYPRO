@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -126,6 +127,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         public TextView productPriceTxtV;
         public TextView productQuantityTxtV;
         public ImageView productImageImgV;
+        public ImageButton saleImageV;
         public View layout;
 
         public ViewHolder(View v) {
@@ -135,6 +137,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
             productPriceTxtV = v.findViewById(R.id.ProductPrice);
             productQuantityTxtV = v.findViewById(R.id.ProductQuantity);
             productImageImgV = v.findViewById(R.id.Productimage);
+            saleImageV = v.findViewById(R.id.saleButton);
         }
     }
 
