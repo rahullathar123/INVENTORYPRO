@@ -26,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_INVENTORY_PHONE = "phoneInfo";
     public static final String COLUMN_INVENTORY_SOLD = "soldItems";
     private static final String TAG = DBHelper.class.getSimpleName();
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
 
     public DBHelper(Context context) {
@@ -42,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 COLUMN_INVENTORY_QUANTITY+" INTEGER NOT NULL, "+
                 COLUMN_INVENTORY_IMAGE + " BLOB NOT NULL, " +
                 COLUMN_INVENTORY_PHONE + " INTEGER NOT NULL, " +
-                COLUMN_INVENTORY_SOLD + " INTEGER NOT NULL DEFAULT 0);"
+                COLUMN_INVENTORY_SOLD + " DEFAULT 0);" // add new column
         );
 
     }

@@ -64,8 +64,10 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         holder.productQuantityTxtV.setText("Quantity: " + inventory.getQuantity());
         Picasso.with(mContext).load(inventory.getImage()).placeholder(R.mipmap.ic_launcher).into(holder.productImageImgV);
 
+
         //listen to single view layout click
         holder.layout.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -129,6 +131,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         public ImageView productImageImgV;
         public ImageButton saleImageV;
         public View layout;
+
 
         public ViewHolder(View v) {
             super(v);
