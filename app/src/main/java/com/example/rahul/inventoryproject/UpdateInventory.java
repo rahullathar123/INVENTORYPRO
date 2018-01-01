@@ -21,6 +21,8 @@ public class UpdateInventory extends AppCompatActivity {
     private EditText mQuantityEditText;
     private EditText mImageEditText;
     private EditText mPhoneEditText;
+    private Button mIncreaseQuantity;
+    private Button mDecreaseQuantity;
     private Button mUpdateBtn;
     private Button mOrderSupplies;
 
@@ -39,6 +41,8 @@ public class UpdateInventory extends AppCompatActivity {
         mQuantityEditText = (EditText)findViewById(R.id.dquantityUpdate);
         mImageEditText = (EditText)findViewById(R.id.duserProfileImageLinkUpdate);
         mPhoneEditText = (EditText) findViewById(R.id.dUpdatePhoneNumber);
+        mIncreaseQuantity = (Button) findViewById(R.id.positiveButton);
+        mDecreaseQuantity = (Button) findViewById(R.id.negativeButton);
         mUpdateBtn = (Button)findViewById(R.id.dupdateInventoryButton);
         mOrderSupplies = (Button) findViewById(R.id.dOrderSupplies);
 
@@ -61,7 +65,6 @@ public class UpdateInventory extends AppCompatActivity {
         mPhoneEditText.setText(queriedInventory.getPhoneNumber());
 
 
-
         //listen to add button click to update
         mUpdateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +84,49 @@ public class UpdateInventory extends AppCompatActivity {
             }
         });
 
+
+        mIncreaseQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //call the save person method
+                sumOne();
+
+            }
+        });
+
+        mDecreaseQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                subtractOne();
+            }
+        });
+
     }
 
+
+    private void subtractOne() {
+        String LastValueString = mQuantityEditText.getText().toString();
+        int value;
+        if (LastValueString.isEmpty()) {
+            return;
+        } else if (LastValueString.equals("0")) {
+            return;
+        } else {
+            value = Integer.parseInt(LastValueString);
+            mQuantityEditText.setText(String.valueOf(value - 1));
+        }
+    }
+
+    private void sumOne() {
+        String LastValue = mQuantityEditText.getText().toString();
+        int value;
+        if (LastValue.isEmpty()) {
+            value = 0;
+        } else {
+            value = Integer.parseInt(LastValue);
+        }
+        mQuantityEditText.setText(String.valueOf(value + 1));
+    }
     public void dialPhoneNumber(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + phoneNumber));

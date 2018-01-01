@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class AddInventoryRecord extends AppCompatActivity {
 
@@ -21,8 +23,12 @@ public class AddInventoryRecord extends AppCompatActivity {
     private EditText mImageEditText;
     private EditText mPhoneEditText;
     private Button mAddBtn;
+    private Button mPositiveBtn;
+    private Button mNegativeBtn;
+    private int minteger = 0;
 
     private DBHelper dbHelper;
+    private ArrayList<Inventory> inventories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,8 @@ public class AddInventoryRecord extends AppCompatActivity {
         mQuantityEditText = (EditText)findViewById(R.id.addProductQuantity);
         mImageEditText = (EditText)findViewById(R.id.userProfileImageLink);
         mPhoneEditText = (EditText) findViewById(R.id.addPhone);
+        mPositiveBtn = (Button) findViewById(R.id.positiveButton);
+        mNegativeBtn = (Button) findViewById(R.id.negativeButton);
         mAddBtn = (Button)findViewById(R.id.addNewUserButton);
 
         //listen to add button click
@@ -47,7 +55,6 @@ public class AddInventoryRecord extends AppCompatActivity {
         });
 
     }
-
     private void saveInventory(){
         String name = mNameEditText.getText().toString().trim();
         String price = mPriceEditText.getText().toString().trim();
