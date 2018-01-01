@@ -62,8 +62,16 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         holder.productNameTxtV.setText("Product Name: " + inventory.getProductName());
         holder.productPriceTxtV.setText("price: " + inventory.getPrice());
         holder.productQuantityTxtV.setText("Quantity: " + inventory.getQuantity());
-        Picasso.with(mContext).load(inventory.getImage()).placeholder(R.mipmap.ic_launcher).into(holder.productImageImgV);
 
+        // set on click listener
+
+        holder.saleImageV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        Picasso.with(mContext).load(inventory.getImage()).placeholder(R.mipmap.ic_launcher).into(holder.productImageImgV);
 
         //listen to single view layout click
         holder.layout.setOnClickListener(new View.OnClickListener() {
