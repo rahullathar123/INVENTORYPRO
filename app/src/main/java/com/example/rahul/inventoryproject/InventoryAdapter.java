@@ -2,9 +2,13 @@ package com.example.rahul.inventoryproject;
 
 
 import android.app.AlertDialog;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.CursorWrapper;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +26,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     private ArrayList<Inventory> mInventoryList;
     private Context mContext;
     private RecyclerView mRecyclerV;
+    private CursorWrapper cursor;
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -69,8 +74,26 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         holder.saleImageV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int quantity = Integer.parseInt(inventory.getQuantity());
-                quantity = quantity - 1;
+                // Perform action on click
+                //get the Uri for the current item
+                Uri mCurrentUri = ContentUris.withAppendedId(Inventory.CONTENT_URI, id);
+
+                // Find the columns of inventory attributes that we're interested in
+                int quantityColumnIndex = cursor.getColumnIndex(DBHelper.COLUMN_INVENTORY_QUANTITY);
+
+                //read the inventory attributes from the Cursor for the current item
+                int quantity = cursor.getInt(quantityColumnIndex);
+
+                // Defines an object to contain the updated values
+                ContentValues updateValues = new ContentValues();
+                updateValues.put(DBHelper.COLUMN_INVENTORY_QUANTITY, quantity--);
+
+                //update the item with the content URI mCurrentUri and pass in the new
+                //content values. Pass in null for the selection and selection args
+                //because mCurrentUri will already identify the correct row in the database that
+                // we want to modify.
+                int rowsUpdate = getContentResolver().update(mCurrentUri, updateValues, null, null);
+
             }
         });
         Picasso.with(mContext).load(inventory.getImage()).placeholder(R.mipmap.ic_launcher).into(holder.productImageImgV);
