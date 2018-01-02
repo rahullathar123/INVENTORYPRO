@@ -54,7 +54,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
@@ -63,12 +63,14 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         holder.productPriceTxtV.setText("price: " + inventory.getPrice());
         holder.productQuantityTxtV.setText("Quantity: " + inventory.getQuantity());
 
-        // set on click listener
+
+        // set on click listener on sale image button
 
         holder.saleImageV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int quantity = Integer.parseInt(inventory.getQuantity());
+                quantity = quantity - 1;
             }
         });
         Picasso.with(mContext).load(inventory.getImage()).placeholder(R.mipmap.ic_launcher).into(holder.productImageImgV);
@@ -115,6 +117,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
 
     }
+
 
     private void goToUpdateActivity(long inventoryId){
         Intent goToUpdate = new Intent(mContext, UpdateInventory.class);
