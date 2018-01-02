@@ -40,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private static final String TAG = DBHelper.class.getSimpleName();
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
 
     public DBHelper(Context context) {
