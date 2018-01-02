@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,6 +26,19 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_INVENTORY_IMAGE = "image";
     public static final String COLUMN_INVENTORY_PHONE = "phoneInfo";
     public static final String COLUMN_INVENTORY_SOLD = "soldItems";
+
+
+    //Content URI
+
+
+    public static final String CONTENT_AUTHORITY = "com.example.rahul.inventoryproject";
+
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+
+    public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, TABLE_NAME);
+
+
+
     private static final String TAG = DBHelper.class.getSimpleName();
     private static final int DATABASE_VERSION = 5;
 

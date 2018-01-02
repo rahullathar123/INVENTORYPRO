@@ -25,6 +25,11 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".UpdateInventory"
             android:parentActivityName=".MainActivity"/>
+
+        <provider
+            android:name=".data.DBHelper"
+            android:authorities="com.example.rahul.inventoryproject"
+            android:exported="false" />
     </application>
 
 </manifest>
