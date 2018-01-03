@@ -5,11 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import static com.example.rahul.inventoryproject.InventoryContract.InventoryEntry.COLUMN_ID;
+import static com.example.rahul.inventoryproject.InventoryContract.InventoryEntry.COLUMN_INVENTORY_IMAGE;
+import static com.example.rahul.inventoryproject.InventoryContract.InventoryEntry.COLUMN_INVENTORY_NAME;
+import static com.example.rahul.inventoryproject.InventoryContract.InventoryEntry.COLUMN_INVENTORY_PHONE;
+import static com.example.rahul.inventoryproject.InventoryContract.InventoryEntry.COLUMN_INVENTORY_PRICE;
+import static com.example.rahul.inventoryproject.InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY;
+import static com.example.rahul.inventoryproject.InventoryContract.InventoryEntry.COLUMN_INVENTORY_SOLD;
+import static com.example.rahul.inventoryproject.InventoryContract.InventoryEntry.TABLE_NAME;
 
 /**
  * Created by rahul on 2017-12-27.
@@ -18,29 +26,10 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "inventory.db";
-    public static final String TABLE_NAME = "Inventory";
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_INVENTORY_NAME = "name";
-    public static final String COLUMN_INVENTORY_PRICE = "price";
-    public static final String COLUMN_INVENTORY_QUANTITY = "quantity";
-    public static final String COLUMN_INVENTORY_IMAGE = "image";
-    public static final String COLUMN_INVENTORY_PHONE = "phoneInfo";
-    public static final String COLUMN_INVENTORY_SOLD = "soldItems";
-
-
-    //Content URI
-
-
-    public static final String CONTENT_AUTHORITY = "com.example.rahul.inventoryproject";
-
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
-
-    public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, TABLE_NAME);
-
-
+    private static final int DATABASE_VERSION = 6;
 
     private static final String TAG = DBHelper.class.getSimpleName();
-    private static final int DATABASE_VERSION = 6;
+
 
 
     public DBHelper(Context context) {
