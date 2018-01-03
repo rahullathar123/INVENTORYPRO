@@ -29,7 +29,7 @@
             android:parentActivityName=".MainActivity"/>
 
         <provider
-            android:name=".inventoryproject.DBHelper"
+            android:name=".DBHelper"
             android:authorities="com.example.rahul.inventoryproject"
             android:exported="false" />
     </application>
