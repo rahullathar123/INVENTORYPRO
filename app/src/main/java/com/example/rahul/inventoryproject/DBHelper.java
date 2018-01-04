@@ -126,7 +126,7 @@ public class DBHelper extends SQLiteOpenHelper {
             receivedInventory.setQuantity(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_QUANTITY)));
             receivedInventory.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_IMAGE)));
             receivedInventory.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_PHONE)));
-            receivedInventory.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_SOLD)));
+            receivedInventory.setSoldItems(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_SOLD)));
         }
 
 
