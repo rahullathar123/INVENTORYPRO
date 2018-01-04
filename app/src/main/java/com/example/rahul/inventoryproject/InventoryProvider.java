@@ -157,7 +157,7 @@ public class InventoryProvider extends ContentProvider {
         }
 
         Integer phoneNumber = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_INVENTORY_PHONE);
-        if (phoneNumber != null) {
+        if (phoneNumber != null && phoneNumber < 0) {
             throw new IllegalArgumentException("Product requires valid phone");
         }
 
@@ -268,7 +268,7 @@ public class InventoryProvider extends ContentProvider {
 
         if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_INVENTORY_PHONE)) {
             Integer phoneNumber = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_INVENTORY_PHONE);
-            if (phoneNumber != null) {
+            if (phoneNumber != null && phoneNumber < 0) {
                 throw new IllegalArgumentException("Product requires valid phoneNumber");
             }
         }

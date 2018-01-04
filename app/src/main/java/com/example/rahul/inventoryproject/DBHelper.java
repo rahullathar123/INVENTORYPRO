@@ -26,7 +26,7 @@ import static com.example.rahul.inventoryproject.InventoryContract.InventoryEntr
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "inventory.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
     private static final String TAG = DBHelper.class.getSimpleName();
 
@@ -104,7 +104,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 inventory.setPrice(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_PRICE)));
                 inventory.setQuantity(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_QUANTITY)));
                 inventory.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_IMAGE)));
-                // inventory.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_PHONE)));
+                inventory.setPhoneNumber(cursor.getString(cursor.getColumnIndex(COLUMN_INVENTORY_PHONE)));
                 inventoryArrayList.add(inventory);
             }while (cursor.moveToNext());
         }
