@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.CursorWrapper;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import java.util.ArrayList;
 
 
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ViewHolder> {
+    public static final String LOG_TAG = InventoryAdapter.class.getSimpleName();
+
+
     private ArrayList<Inventory> mInventoryList;
     private Context mContext;
     private RecyclerView mRecyclerV;
@@ -76,13 +80,16 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
             public void onClick(View v) {
                 // Perform action on click
                 //get the Uri for the current item
-                Uri mCurrentUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, Long.parseLong(InventoryContract.InventoryEntry.COLUMN_ID));
 
+
+                Uri mCurrentUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, Long.parseLong(InventoryContract.InventoryEntry.COLUMN_ID));
+                Log.w(LOG_TAG, "column_id:" + InventoryContract.InventoryEntry.COLUMN_ID);
                 // Find the columns of inventory attributes that we're interested in
                 int quantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY);
 
                 //read the inventory attributes from the Cursor for the current item
                 int quantity = cursor.getInt(quantityColumnIndex);
+
 
                 // Defines an object to contain the updated values
                 ContentValues updateValues = new ContentValues();
