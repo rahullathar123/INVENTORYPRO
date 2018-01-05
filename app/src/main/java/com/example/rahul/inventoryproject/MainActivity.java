@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void populaterecyclerView(String filter){
         dbHelper = new DBHelper(this);
-        adapter = new InventoryAdapter(dbHelper.inventoryArrayList(filter), this, mRecyclerView, cursor);
+        adapter = new InventoryAdapter(dbHelper.inventoryArrayList(filter), this, mRecyclerView, dbHelper);
         mRecyclerView.setAdapter(adapter);
 
     }

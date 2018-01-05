@@ -30,15 +30,16 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     private Context mContext;
     private RecyclerView mRecyclerV;
     private Cursor cursor;
+    private DBHelper mDbHelper;
 
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public InventoryAdapter(ArrayList<Inventory> myDataset, Context context, RecyclerView recyclerView, Cursor cursor1) {
+    public InventoryAdapter(ArrayList<Inventory> myDataset, Context context, RecyclerView recyclerView, DBHelper dbHelper) {
         mInventoryList = myDataset;
         mContext = context;
         mRecyclerV = recyclerView;
-        cursor = cursor1;
+        mDbHelper = dbHelper;
     }
 
     public void add(int position, Inventory inventory) {
@@ -69,10 +70,10 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         // - replace the contents of the view with that element
 
         final Inventory inventory = mInventoryList.get(position);
+        mDbHelper.updateRecord(Inventory.getId(), mContext, inventory);
         holder.productNameTxtV.setText("Product Name: " + inventory.getProductName());
         holder.productPriceTxtV.setText("price: " + inventory.getPrice());
         holder.productQuantityTxtV.setText("Quantity: " + inventory.getQuantity());
-
 
         // set on click listener on sale image button
 
@@ -81,8 +82,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
             public void onClick(View v) {
                 // Perform action on click
                 //get the Uri for the current item
-
                 long currentId = Inventory.getId();
+
                 Uri mCurrentUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, currentId);
                 //Log.w(LOG_TAG, "column_id:" + InventoryContract.InventoryEntry.COLUMN_ID);
                 // Find the columns of inventory attributes that we're interested in
