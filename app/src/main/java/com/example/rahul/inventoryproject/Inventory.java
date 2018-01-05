@@ -6,7 +6,7 @@ package com.example.rahul.inventoryproject;
 
 public class Inventory {
 
-    private long id;
+    private static long id;
     private String productName;
     private String price;
     private String quantity;
@@ -15,7 +15,7 @@ public class Inventory {
     private String soldItems;
 
     public Inventory(long id, String productName, String price, String quantity, String image, String phoneNumber, String soldItems) {
-        this.id = id;
+        Inventory.id = id;
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
@@ -35,20 +35,20 @@ public class Inventory {
         this.phoneNumber = phoneNumber;
     }
 
+    public static long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        Inventory.id = id;
+    }
+
     public String getSoldItems() {
         return soldItems;
     }
 
     public void setSoldItems(String soldItems) {
         this.soldItems = soldItems;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getProductName() {

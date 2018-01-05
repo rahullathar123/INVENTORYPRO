@@ -81,8 +81,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
                 // Perform action on click
                 //get the Uri for the current item
 
-
-                Uri mCurrentUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, Long.parseLong("_id"));
+                long currentId = Inventory.getId();
+                Uri mCurrentUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, currentId);
                 Log.w(LOG_TAG, "column_id:" + InventoryContract.InventoryEntry.COLUMN_ID);
                 // Find the columns of inventory attributes that we're interested in
                 int quantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY);
@@ -118,7 +118,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
                     public void onClick(DialogInterface dialog, int which) {
 
                         //go to update activity
-                        goToUpdateActivity(inventory.getId());
+                        goToUpdateActivity(Inventory.getId());
 
                     }
                 });
@@ -126,7 +126,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DBHelper dbHelper = new DBHelper(mContext);
-                        dbHelper.deleteInventory(inventory.getId(), mContext);
+                        dbHelper.deleteInventory(Inventory.getId(), mContext);
 
                         mInventoryList.remove(position);
                         mRecyclerV.removeViewAt(position);
