@@ -2,6 +2,7 @@ package com.example.rahul.inventoryproject;
 
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private DBHelper dbHelper;
     private InventoryAdapter adapter;
     private String filter = "";
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void populaterecyclerView(String filter){
         dbHelper = new DBHelper(this);
-        adapter = new InventoryAdapter(dbHelper.inventoryArrayList(filter), this, mRecyclerView);
+        adapter = new InventoryAdapter(dbHelper.inventoryArrayList(filter), this, mRecyclerView, cursor);
         mRecyclerView.setAdapter(adapter);
-
 
     }
 

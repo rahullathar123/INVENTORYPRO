@@ -7,7 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.CursorWrapper;
+import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,14 +29,16 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     private ArrayList<Inventory> mInventoryList;
     private Context mContext;
     private RecyclerView mRecyclerV;
-    private CursorWrapper cursor;
+    private Cursor cursor;
+
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public InventoryAdapter(ArrayList<Inventory> myDataset, Context context, RecyclerView recyclerView) {
+    public InventoryAdapter(ArrayList<Inventory> myDataset, Context context, RecyclerView recyclerView, Cursor cursor1) {
         mInventoryList = myDataset;
         mContext = context;
         mRecyclerV = recyclerView;
+        cursor = cursor1;
     }
 
     public void add(int position, Inventory inventory) {
