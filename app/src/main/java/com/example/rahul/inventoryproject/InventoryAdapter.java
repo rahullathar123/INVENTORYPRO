@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.database.CursorWrapper;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +82,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
 
                 long currentId = Inventory.getId();
                 Uri mCurrentUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, currentId);
-                Log.w(LOG_TAG, "column_id:" + InventoryContract.InventoryEntry.COLUMN_ID);
+                //Log.w(LOG_TAG, "column_id:" + InventoryContract.InventoryEntry.COLUMN_ID);
                 // Find the columns of inventory attributes that we're interested in
                 int quantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY);
 
@@ -100,6 +99,12 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
                 //because mCurrentUri will already identify the correct row in the database that
                 // we want to modify.
                 int rowsUpdate = mContext.getContentResolver().update(mCurrentUri, updateValues, null, null);
+
+                Intent goToUpdate = new Intent(mContext, UpdateInventory.class);
+                goToUpdate.putExtra("Inventory_ID", rowsUpdate);
+                mContext.startActivity(goToUpdate);
+
+
 
             }
         });
