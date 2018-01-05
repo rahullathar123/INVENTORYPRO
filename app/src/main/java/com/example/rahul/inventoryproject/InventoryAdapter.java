@@ -82,7 +82,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
                 //get the Uri for the current item
 
 
-                Uri mCurrentUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, Long.parseLong(InventoryContract.InventoryEntry.COLUMN_ID));
+                Uri mCurrentUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, Long.parseLong("_id"));
                 Log.w(LOG_TAG, "column_id:" + InventoryContract.InventoryEntry.COLUMN_ID);
                 // Find the columns of inventory attributes that we're interested in
                 int quantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY);
