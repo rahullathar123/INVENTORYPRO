@@ -100,7 +100,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
                 // we want to modify.
                 int rowsUpdate = mContext.getContentResolver().update(mCurrentUri, updateValues, null, null);
 
-                Intent goToUpdate = new Intent(mContext, UpdateInventory.class);
+                Intent goToUpdate = new Intent(mContext, MainActivity.class);
                 goToUpdate.putExtra("Inventory_ID", rowsUpdate);
                 mContext.startActivity(goToUpdate);
 
