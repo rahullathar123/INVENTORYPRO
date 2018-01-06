@@ -85,17 +85,20 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
                 long currentId = Inventory.getId();
 
                 Uri mCurrentUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, currentId);
-                //Log.w(LOG_TAG, "column_id:" + InventoryContract.InventoryEntry.COLUMN_ID);
                 // Find the columns of inventory attributes that we're interested in
-                int quantityColumnIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY);
+                int quantityColumnIndex = mInventoryList.indexOf(InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY);
 
                 //read the inventory attributes from the Cursor for the current item
-                int quantity = cursor.getInt(quantityColumnIndex);
+                int quantity = mInventoryList.indexOf(quantityColumnIndex);
 
+                quantity = (int) Inventory.getId();
+                quantity = quantity - 1;
+                inventory.setQuantity(String.valueOf(quantity));
+                mDbHelper.updateRecord(Inventory.getId(), mContext, inventory);
 
                 // Defines an object to contain the updated values
                 ContentValues updateValues = new ContentValues();
-                updateValues.put(InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY, quantity--);
+                updateValues.put(InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY, quantity);
 
                 //update the item with the content URI mCurrentUri and pass in the new
                 //content values. Pass in null for the selection and selection args
